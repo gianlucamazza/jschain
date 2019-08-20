@@ -11,6 +11,8 @@ The idea is to expand the chain without breaking the original consensus.
 
 - tor daemon/sync with other nodes trought the newtork
 
+- wallet and transactions to be implemented
+
 - nonsql database
 
 - new pow alghritm (*)
