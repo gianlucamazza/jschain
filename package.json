@@ -8,8 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "run": "node main.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "jschaind": "node main.js"
   },
   "author": "",
   "license": "ISC"
