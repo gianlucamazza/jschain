@@ -19,4 +19,8 @@ The idea is to expand the chain without breaking the original consensus.
 
 
 
-(*) to be discussed
+( * ) to be discussed
+
+- federated mining ( ** )
+
+( ** ) feature
