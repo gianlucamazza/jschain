@@ -1,0 +1,16 @@
+# jschain
+a basic blockchain implementation in javascript/node
+
+The miner has been stopped at block #35 after mining empty blocks at fixed difficulty of 5.
+All coinbases till block 35 has been burned, no address/output has been provided.
+The idea is to expand the chain without breaking the original consensus.
+
+target witout destroing consensus:
+difficulty adjustment based on average time (*)
+tor daemon/sync with other nodes trought the newtork
+nonsql database
+new pow alghritm (*)
+
+
+
+(*) to be discussed
