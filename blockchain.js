@@ -2,21 +2,45 @@ const Block = require("./block");
 
 const genesis_quote = 'Welcome to jschain';
 
-var fs = require('fs');
+const fs = require('fs');
+const directory = './jschain/chain/';
+
+function cleanChain() {
+    let files = fs.readdirSync(directory);
+    for (let i in files) {
+        fs.unlinkSync(directory + files[i]);
+    }
+    console.log('blockchain folder cleaned')
+}
+
+function readChain() {
+    this.chain = [];
+    let files = fs.readdirSync(directory);
+    for (let i in files) {
+        let data = fs.readFileSync(directory + files[i]);
+        this.chain[i] = JSON.parse(data);
+    }
+    return this.chain;
+}
 
 class Blockchain{
     
     constructor() {
-        this.chain = [Blockchain.createGenesis()];
+        this.chain = readChain();
+        if(this.chain.length > 0){
+            console.log('resuming chain...');
+            console.log('current block height: ' + this.chain[this.chain.length - 1].index)
+        }else{
+            // clean blockchain folder
+            cleanChain();
+            this.chain = [Blockchain.createGenesis()];
+        }
     }
 
     static createGenesis() {
-        let block = new Block(Date.now(), genesis_quote, "0");
+        let block = new Block(0, Date.now(), genesis_quote, "0");
         console.log('creating genesis block.. ');
-        fs.writeFileSync('jschain/chain/' + 0 + '.txt', JSON.stringify(block), 'utf8', function (err) {
-            if (err) throw err;
-            console.log('Saved!');
-        });
+        fs.writeFileSync(directory + 0 + '.json', JSON.stringify(block, null, 4));
         return block
     }
 
@@ -29,18 +53,11 @@ class Blockchain{
             const currentBlock = this.chain[i];
             const previousBlock = this.chain[i - 1];
 
-            if (currentBlock.hash !== currentBlock.calculateHash()) {
-                return false;
-            }
-
             if (currentBlock.previousHash !== previousBlock.hash) {
                 return false;
             }
 
-            fs.writeFileSync('jschain/chain/' + currentBlock.index + '.txt', JSON.stringify(currentBlock), 'utf8', function (err) {
-                if (err) throw err;
-                console.log('Saved!');
-            });
+            fs.writeFileSync('jschain/chain/' + currentBlock.index + '.json', JSON.stringify(currentBlock, null, 4));
            }
         return true;
     }

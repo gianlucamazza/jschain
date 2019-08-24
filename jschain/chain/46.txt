@@ -1,0 +1,1 @@
+{"index":46,"difficulty":5,"timestamp":45,"previousHash":"000009a34b473a3ae5482db90f4ed68e077c58c11121413700153ba3bd50a5ac","hash":"000003b50cf3823391c3b0027a4b8582f27464bf7f34f36ff587866f0969a92e","nonce":765992,"reward":500}

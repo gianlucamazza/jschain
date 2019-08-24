@@ -1,0 +1,9 @@
+{
+    "index": 1,
+    "difficulty": 5,
+    "timestamp": 1566642268372,
+    "hash": "000003307662450b5e3630f84e98bc01f09e9422fc906e3761427c5b6e5c6706",
+    "nonce": 494855,
+    "reward": 500,
+    "previousHash": "95df78a39d6cdd118fc17c5c801046ee5db10c68817570a0859722635b6ef7e5"
+}

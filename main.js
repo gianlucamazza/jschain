@@ -6,8 +6,8 @@ const Miner = require("./miner");
 const debug = true;
 
 // create directory if necessary
-var fs = require('fs');
-var dir = 'jschain';
+let fs = require('fs');
+let dir = 'jschain';
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
     fs.mkdirSync(dir + "/chain");
@@ -16,8 +16,8 @@ if (!fs.existsSync(dir)){
 }
 
 let jsChain = new Blockchain();
-
-for(let i = 0; i >= 0; i++){
+console.log('jschain daemon started...');
+for(let i = jsChain.chain.length; i >= 0; i++){
     let block = new Block(i, Date.now());
     Miner.prepareBlock(jsChain, block);
     Miner.submitBlock(jsChain.chain, block);

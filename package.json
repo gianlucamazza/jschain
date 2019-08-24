@@ -1,6 +1,6 @@
 {
   "name": "js-blockchain",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "main.js",
   "dependencies": {
@@ -10,6 +10,6 @@
   "scripts": {
     "jschaind": "node main.js"
   },
-  "author": "",
+  "author": "gmazza",
   "license": "ISC"
 }

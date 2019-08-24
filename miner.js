@@ -12,6 +12,7 @@ class Miner {
     }
 
     static mineBlock(block, difficulty) {
+        console.log('mining new block...');
         // Keep changing the nonce until the hash of our block starts with enough zero's.
         const t0 = performance.now();
 
