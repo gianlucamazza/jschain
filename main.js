@@ -1,6 +1,7 @@
-const Block = require("./block");
-const Blockchain = require("./blockchain");
-const Miner = require("./miner");
+const Block = require('./block');
+const Blockchain = require('./blockchain');
+const Miner = require('./miner');
+const Wallet = require('./wallet');
 
 // debug variable flag
 const debug = true;
@@ -10,12 +11,13 @@ let fs = require('fs');
 let dir = 'jschain';
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
-    fs.mkdirSync(dir + "/chain");
-    fs.mkdirSync(dir + "/wallet");
-    fs.mkdirSync(dir + "/logs");
+    fs.mkdirSync(dir + '/chain');
+    fs.mkdirSync(dir + '/wallet');
+    fs.mkdirSync(dir + '/logs');
 }
 
 let jsChain = new Blockchain();
+let wallet = new Wallet();
 console.log('jschain daemon started...');
 for(let i = jsChain.chain.length; i >= 0; i++){
     let block = new Block(i, Date.now());
