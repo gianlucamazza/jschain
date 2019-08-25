@@ -1,4 +1,6 @@
 const SHA256 = require('crypto-js/sha256');
+const Reward = require('./reward');
+
 
 class Block {
     
@@ -6,13 +8,22 @@ class Block {
         this.index = index;
         this.difficulty = 5;
         this.timestamp = timestamp;
-        this.hash = this.calculateHash();
+        this.previousHash = 0;
         this.nonce = 0;
-        this.reward = 500;
+        this.reward = this.calculateReward(index);
+        this.hash = this.calculateHash();
     }
 
     calculateHash() {
-        return SHA256(this.index + this.previousHash + this.timestamp + JSON.stringify(this.timestamp) + this.nonce).toString();
+        return SHA256(this.index + this.previousHash +
+            this.timestamp + JSON.stringify(this.timestamp)
+            + this.nonce).toString();
+    }
+
+    calculateReward(height) {
+        let reward = Reward.calculateReward(height);
+        console.log('calculating reward: ' + reward);
+        return reward;
     }
 
 }
