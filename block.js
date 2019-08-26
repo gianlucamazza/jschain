@@ -6,7 +6,7 @@ class Block {
     
     constructor(index, timestamp) {
         this.index = index;
-        this.difficulty = 5;
+        this.difficulty = 0;
         this.timestamp = timestamp;
         this.previousHash = 0;
         this.nonce = 0;
@@ -22,7 +22,6 @@ class Block {
 
     calculateReward(height) {
         let reward = Reward.calculateReward(height);
-        console.log('calculating reward: ' + reward);
         return reward;
     }
 

@@ -1,3 +1,5 @@
+
+
 const Block = require("./block");
 
 const genesis_quote = 'Welcome to jschain';
@@ -48,8 +50,12 @@ class Blockchain{
         return block
     }
 
-    latestBlock() {
+    lastBlock() {
         return this.chain[this.chain.length - 1]
+    }
+
+    getBlock(blockNum) {
+        return this.chain[blockNum]
     }
 
     checkValid() {

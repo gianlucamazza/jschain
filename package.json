@@ -4,10 +4,10 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
-    "bip39": "^3.0.2",
-    "crypto-js": "^3.1.9-1"
+    "crypto-js": "^3.1.9-1",
+    "bip39": "latest",
+    "hdkey": "latest"
   },
-  "devDependencies": {},
   "scripts": {
     "jschaind": "node main.js"
   },

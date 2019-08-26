@@ -1,6 +1,8 @@
 const initialReward = 500;
-let numHalvings;
 const halvingBlocks = 10;
+
+let numHalvings;
+
 
 let calculateReward = function(blockHeight) {
 
@@ -10,7 +12,7 @@ let calculateReward = function(blockHeight) {
     for(let i = 0; i < numHalvings; i++){
         currentReward = currentReward / 2;
     }
-
+    if(currentReward < 1) return 1;
     return currentReward;
 };
 

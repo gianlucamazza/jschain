@@ -2,11 +2,9 @@ const Block = require('./block');
 const Blockchain = require('./blockchain');
 const Miner = require('./miner');
 const Wallet = require('./wallet');
+const difficulty = require('./difficulty');
 
-// debug variable flag
-const debug = true;
-
-// create directory if necessary
+// create base directory
 let fs = require('fs');
 let dir = 'jschain';
 if (!fs.existsSync(dir)){
@@ -16,18 +14,24 @@ if (!fs.existsSync(dir)){
     fs.mkdirSync(dir + '/logs');
 }
 
-let jsChain = new Blockchain();
-let wallet = new Wallet();
-console.log('jschain daemon started...');
-for(let i = jsChain.chain.length; i >= 0; i++){
-    let block = new Block(i, Date.now());
+function startMiner(index, jsChain) {
+    let block = new Block(index, Date.now());
+
+    block.difficulty = difficulty.adjustDifficulty(jsChain);
     Miner.prepareBlock(jsChain, block);
     Miner.submitBlock(jsChain.chain, block);
     if(!jsChain.checkValid()){
         console.log('error chain not valid');
     }
-    console.log('latest height: ' + jsChain.latestBlock().index);
-    console.log('latest hash: ' + jsChain.latestBlock().hash);
-    console.log('previous hash: ' + jsChain.latestBlock().previousHash);
-    console.log('difficulty: ' + jsChain.latestBlock().difficulty)
 }
+
+let jsChain = new Blockchain();
+let wallet = new Wallet();
+
+    console.log('jschain daemon started...');
+    while(true) {
+        startMiner(jsChain.lastBlock().index + 1, jsChain);
+        console.log('height: ' + jsChain.lastBlock().index)
+        console.log('difficulty: ' + jsChain.lastBlock().difficulty)
+        console.log('reward: ' + jsChain.lastBlock().reward)
+    }
