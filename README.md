@@ -27,3 +27,28 @@ example, a self generated GENESIS BLOCK:
     "hash": "168e94440a58ffc107da388a245204afc6e3dc31765ae4c8d7624249312e3eb0"
 }
 ```
+
+example of configuration file:
+```
+{
+    "anchor_block": "00000000000000000012d97611f9ea8048dc015b4de3aefb205dbc64d6bde0dc",
+    "contract_owner": "",
+    "initial_reward": "500",
+    "halving_blocks": "5000",
+    "seconds_between_blocks": 60,
+    "starting_network_difficulty": 4,
+    "number_of_blocks_diff_adjustment": 5,
+    "anchor_explorers" : [
+        {
+            "description" : "blockstream",
+            "URL" : "https://blockstream.info",
+            "path" : "/api/blocks/tip/hash"
+        },
+        {
+            "description" : "blockcypher",
+            "URL": "https://api.blockcypher.com",
+            "path": "/v1/btc/main"
+        }
+    ]
+}
+```
