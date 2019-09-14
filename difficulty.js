@@ -1,6 +1,6 @@
 const config = require("./config.json");
 
-const numberOfBlocks = config.number_of_blocks_reorg;
+const numberOfBlocks = config.number_of_blocks_diff_adjustment;
 const startingDiff = config.starting_network_difficulty;
 const secondsBetweenBlocks = config.seconds_between_blocks;
 

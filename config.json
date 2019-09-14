@@ -3,6 +3,6 @@
     "initial_reward": "500",
     "halving_blocks": "5000",
     "seconds_between_blocks": 60,
-    "starting_network_difficulty": 2,
-    "number_of_blocks_reorg": 5
+    "starting_network_difficulty": 4,
+    "number_of_blocks_diff_adjustment": 5
 }
