@@ -1,11 +1,11 @@
-const initialReward = 500;
-const halvingBlocks = 10;
+const config = require("./config.json");
+
+const initialReward = config.initial_reward;
+const halvingBlocks = config.halving_blocks;
 
 let numHalvings;
 
-
-let calculateReward = function(blockHeight) {
-
+function calculateReward (blockHeight) {
     if(blockHeight === 0) return initialReward;
     numHalvings = Math.floor(blockHeight / halvingBlocks);
     let currentReward = initialReward;

@@ -1,9 +1,6 @@
-
-
 const Block = require("./block");
-
-const genesis_quote = 'Welcome to jschain';
-
+const config = require("./config.json");
+const genesis_quote = config.genesis_phrase;
 const fs = require('fs');
 const directory = './jschain/chain/';
 
@@ -11,7 +8,7 @@ function cleanChain(blockNum) {
     let files = fs.readdirSync(directory);
     if(files.length === 0) return;
     for (let i = files.length; i >= blockNum - 1;  i--) {
-        console.log('removing unvalid block.., : ' + files[i - 1]);
+        console.log('removing not valid block.., : ' + files[i - 1]);
         this.chain.pop();
         fs.unlinkSync(directory + files[i - 1]);
     }
@@ -34,7 +31,7 @@ class Blockchain{
     constructor() {
         this.chain = readChain();
         if(this.chain.length > 0){
-            console.log('resuming chain...');
+            console.log('restarting chain...');
             console.log('current block height: ' + this.chain[this.chain.length - 1].index)
         }else{
             // clean blockchain folder

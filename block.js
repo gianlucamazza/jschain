@@ -1,16 +1,16 @@
 const SHA256 = require('crypto-js/sha256');
 const Reward = require('./reward');
 
-
 class Block {
     
-    constructor(index, timestamp) {
+    constructor(index, timestamp, address) {
         this.index = index;
         this.difficulty = 0;
         this.timestamp = timestamp;
         this.previousHash = 0;
         this.nonce = 0;
         this.reward = this.calculateReward(index);
+        this.owner = address;
         this.hash = this.calculateHash();
     }
 

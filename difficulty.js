@@ -1,6 +1,8 @@
-const numberOfBlocks = 4;
-const startingDiff = 5;
-const secondsBetweenBlocks = 30;
+const config = require("./config.json");
+
+const numberOfBlocks = config.number_of_blocks_reorg;
+const startingDiff = config.starting_network_difficulty;
+const secondsBetweenBlocks = config.seconds_between_blocks;
 
 function adjustDifficulty(jschain){
     let currentDiff = jschain.lastBlock().difficulty;
