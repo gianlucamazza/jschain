@@ -1,7 +1,7 @@
 const Block = require("./block");
 const config = require("./config.json");
-const genesis_quote = config.genesis_phrase;
 const fs = require('fs');
+const axios = require('axios');
 const directory = './jschain/chain/';
 
 function cleanChain(blockNum) {
@@ -27,7 +27,6 @@ function readChain() {
 }
 
 class Blockchain{
-    
     constructor() {
         this.chain = readChain();
         if(this.chain.length > 0){
@@ -41,10 +40,21 @@ class Blockchain{
     }
 
     static createGenesis() {
-        let block = new Block(0, Date.now(), genesis_quote, "0");
-        console.log('creating genesis block.. ');
-        fs.writeFileSync(directory + 0 + '.json', JSON.stringify(block, null, 4));
-        return block
+        let owner = fs.readFileSync('./jschain/wallet/xpub.public', 'UTF-8');
+        function findAnchorBlock(callback) {
+            axios.get(config.anchor_explorers[0].URL + config.anchor_explorers[0].path)
+                .then(resp => {
+                    callback(resp.data);
+                })
+        }
+
+
+        findAnchorBlock(function (anchor) {
+            let block = new Block(0, Date.now(), owner, anchor);
+            console.log('Anchor block: ' + block.anchor);
+            fs.writeFileSync(directory + 0 + '.json', JSON.stringify(block, null, 4));
+            return block
+        });
     }
 
     lastBlock() {

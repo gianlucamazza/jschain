@@ -19,14 +19,20 @@ class Wallet {
         } catch (err) {
             console.log(err);
             if(err.code === 'ENOENT'){
-                console.log('generate new seed');
-                mnemonic = bip39.generateMnemonic();
-                fs.writeFileSync(directory + 'seed.secret', mnemonic);
+                this.createSeed();
             }
         }
         if(bip39.validateMnemonic(mnemonic)){
             return mnemonic
         }
+    }
+
+    createSeed() {
+        console.log('generate new seed');
+        let mnemonic = bip39.generateMnemonic();
+        fs.writeFileSync(directory + 'seed.secret', mnemonic);
+        fs.writeFileSync(directory + 'xpub.public' , node.fromMasterSeed(Buffer.from(mnemonic)).publicExtendedKey)
+        return mnemonic;
     }
 
     publicExtendedKey(seed) {

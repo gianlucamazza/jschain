@@ -25,13 +25,18 @@ function startMiner(index, jsChain) {
     }
 }
 
-let jsChain = new Blockchain();
 let wallet = new Wallet();
+let jsChain = new Blockchain(function () {
+    console.log('new chain created...');
+        startMiner(jsChain.lastBlock().index + 1, jsChain);
+});
 
-console.log('jschain daemon started...');
-while(true) {
+while(jsChain.lastBlock()) {
     startMiner(jsChain.lastBlock().index + 1, jsChain);
-    console.log('height: ' + jsChain.lastBlock().index)
-    console.log('difficulty: ' + jsChain.lastBlock().difficulty)
-    console.log('reward: ' + jsChain.lastBlock().reward)
+    console.log('height: ' + jsChain.lastBlock().index);
+    console.log('difficulty: ' + jsChain.lastBlock().difficulty);
+    console.log('reward: ' + jsChain.lastBlock().reward);
 }
+
+
+
