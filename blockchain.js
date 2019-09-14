@@ -41,15 +41,13 @@ class Blockchain{
 
     static createGenesis() {
         let owner = fs.readFileSync('./jschain/wallet/xpub.public', 'UTF-8');
-        function findAnchorBlock(callback) {
+        function getAnchorBlock(callback) {
             axios.get(config.anchor_explorers[0].URL + config.anchor_explorers[0].path)
                 .then(resp => {
                     callback(resp.data);
                 })
         }
-
-
-        findAnchorBlock(function (anchor) {
+        getAnchorBlock(function (anchor) {
             let block = new Block(0, Date.now(), owner, anchor);
             console.log('Anchor block: ' + block.anchor);
             fs.writeFileSync(directory + 0 + '.json', JSON.stringify(block, null, 4));
@@ -75,7 +73,7 @@ class Blockchain{
             }
 
             fs.writeFileSync('jschain/chain/' + currentBlock.index + '.json', JSON.stringify(currentBlock, null, 4));
-           }
+        }
         return true;
     }
 }

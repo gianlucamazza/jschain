@@ -26,10 +26,7 @@ function startMiner(index, jsChain) {
 }
 
 let wallet = new Wallet();
-let jsChain = new Blockchain(function () {
-    console.log('new chain created...');
-        startMiner(jsChain.lastBlock().index + 1, jsChain);
-});
+let jsChain = new Blockchain();
 
 while(jsChain.lastBlock()) {
     startMiner(jsChain.lastBlock().index + 1, jsChain);
